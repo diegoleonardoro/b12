@@ -1,4 +1,23 @@
-- name: Run submission script
-  env:
-    RUN_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-  run: node submission.js
+name: B12 Submission
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # This allows you to run it manually from the UI
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run submission script
+        env:
+          RUN_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: node submission.js
