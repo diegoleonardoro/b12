@@ -1,0 +1,4 @@
+- name: Run submission script
+  env:
+    RUN_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+  run: node submission.js
